@@ -13,8 +13,11 @@ import UserContext from "./context/UserContext";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+  const user = {
+    // tu usuario u otra información aquí
+  };
   return (
-    <UserContext.Provider>
+    <UserContext.Provider value={user}>
       <div className="App">
         <Header />
         <Routes>

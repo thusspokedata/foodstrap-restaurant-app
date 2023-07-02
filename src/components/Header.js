@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 // import { Link } from "react-router-dom";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthContext } from "../context/auth";
 
 // Bootstrap
@@ -19,12 +20,12 @@ function Header() {
               <Nav className="me-auto">
                 <Nav.Link href="/tables">Tables</Nav.Link>
                 <Nav.Link href="/orders">Orders</Nav.Link>
-                <Nav.Link href="/scanner">Scanner</Nav.Link>
+                <Nav.Link href="/scanner"><i className="bi bi-qr-code-scan"></i></Nav.Link>
                 <Nav.Link href="/kitchen">Kitchen</Nav.Link>
               </Nav>
               <Nav>
                 <Nav.Link onClick={logoutUser} href="/login">
-                  Log Out
+                <i className="bi bi-box-arrow-right"></i>
                 </Nav.Link>
               </Nav>
             </>
@@ -32,7 +33,7 @@ function Header() {
             <>
               <div className="justify-content-end">
                 <Nav className="me-auto">
-                  <Nav.Link href="/login">Login</Nav.Link>
+                  <i className="bi bi-box-arrow-in-right"></i>
                 </Nav>
               </div>
             </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Orders from "../components/Orders";
 
 function OrdersPage() {

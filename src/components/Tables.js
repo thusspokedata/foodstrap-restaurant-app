@@ -1,35 +1,47 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import tableopen from "../assets/open.png";
 import tableclose from "../assets/close.png";
-import ClickablePicture from "./ClickablePicture";
+import ClickablePicture from "../components/ClickablePicture";
 import axios from "axios";
+import { AuthContext } from "../context/auth";
 
 function Home() {
-  const [restaurants, setRestaurants] = useState([]);
+  const { user } = useContext(AuthContext);
+  console.log(user)
+  const adminRestoId = user?._id
+  console.log("adminRestoId", adminRestoId)
+
+  const [tables, setTables] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-    axios
-      .get("/api/restaurants", {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setRestaurants(response.data);
-      })
-      .catch((err) => {
-        const errorDescription = err.response.data.message;
-        setErrorMessage(errorDescription);
-      });
-  }, []);
+    if (adminRestoId) {
+      const storedToken = localStorage.getItem("authToken");
+      axios
+        .get(
+          `/api/resto/restaurant/admin/${adminRestoId}?timestamp=${Date.now()}`,
+          {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          setTables(response.data.tables);
+        })
+        .catch((err) => {
+          const errorDescription = err.response.data.message;
+          setErrorMessage(errorDescription);
+        });
+    }
+  }, [adminRestoId]);
+
+
+  console.log("esto es restaurant", tables)
 
   /// creating figure tables
   let t = [];
-  if (restaurants[0]) {
-    for (let i = 0; i < restaurants[0].tables; i++) {
-      t.push(i);
-    }
+  for (let i = 0; i < tables; i++) {
+    t.push(i);
   }
 
   const figures = t.map((table, i) => {
