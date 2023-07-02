@@ -33,6 +33,7 @@ function App() {
           <Route path="/tables" element={<Tables />} />
           <Route path="/login" element={<Login />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders/:tableId" element={<OrdersPage />} />
           <Route path="/kitchen" element={<Kitchen />} />
           {/* <Route path="/qr" element={<QRCustomer />} /> */}
           <Route path="*" element={<h1>404- Not Found </h1>} />

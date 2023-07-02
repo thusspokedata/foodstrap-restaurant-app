@@ -46,8 +46,9 @@ function Home() {
 
   const figures = t.map((table, i) => {
     return (
-      <a href={`/${i}`} key={`${i}`}>
+      <a href={`/orders/${i+1}`} key={`${i}`}>
         <figure className="figure m-2 m-sm-3 m-lg-4 col-5 col-sm-3 col-lg-2">
+          <div>{`Table: ${i+1}`} </div>
           <ClickablePicture img={tableopen} imgClicked={tableclose} />
         </figure>
       </a>
