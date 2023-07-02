@@ -32,8 +32,6 @@ function Home() {
     }
   }, [adminRestoId]);
 
-  console.log('esto es restaurant', tables);
-
   /// creating figure tables
   let t = [];
   for (let i = 0; i < tables; i++) {

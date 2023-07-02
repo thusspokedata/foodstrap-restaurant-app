@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { getProducts } from '../api/api'; 
 import UserContext from '../context/UserContext';
-
 import Table from 'react-bootstrap/Table';
 import MenuItem from './MenuItem';
 
@@ -14,19 +13,15 @@ function Orders() {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
     setClient(sessionStorage.getItem('client'));
-    axios
-      .get('/api/products', {
-        headers: { Authorization: `Bearer ${storedToken}` },
+
+    getProducts()
+      .then((data) => {
+        console.log(data);
+        setMenus(data);
       })
-      .then((response) => {
-        console.log(response.data);
-        setMenus(response.data);
-      })
-      .catch((err) => {
-        const errorDescription = err.response.data.message;
-        setErrorMessage(errorDescription);
+      .catch((errorMessage) => {
+        setErrorMessage(errorMessage);
       });
   }, []);
 

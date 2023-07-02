@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { login } from '../api/api';
 import { AuthContext } from '../context/auth';
 
 // Bootstrap
@@ -51,25 +51,20 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const requestBody = {
-      email,
-      password,
-    };
-    console.log(requestBody);
-    axios
-      .post('/api/restaurant/login', requestBody)
-      .then((response) => {
-        console.log(response.data);
-        const token = response.data.authToken;
+
+    login(email, password)
+      .then((data) => {
+        console.log(data);
+        const token = data.authToken;
         storeToken(token);
         verifyStoredToken().then(() => {
           navigate('/');
         });
       })
-      .catch((err) => {
-        const errorDescription = err.response.data.message;
-        setErrorMessage(errorDescription);
+      .catch((errorMessage) => {
+        setErrorMessage(errorMessage);
       });
+
     setPassword('');
     setEmail('');
   };

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
-import axios from 'axios';
-
-// react bootstrap
+import { useQuery } from 'react-query';
+import { getClient, postOrder } from '../api/api';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Alert from 'react-bootstrap/Alert';
@@ -12,44 +11,22 @@ function SearchClient(props) {
   const [client, setClient] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
+  const { data, error, isLoading, isError } = useQuery(['client', props.result], () => getClient(props.result), {
+    retry: false, 
+  });
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    axios
-      .get(`/api/auth/${props.result}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-        const data = response.data;
-        console.log(`this is data: ${data}`);
-        setClient(data);
-      })
-      .catch((err) => {
-        const errorDescription = err.response.data.message;
-        setErrorMessage(errorDescription);
-      });
-  }, [props.result]);
+    if (data) setClient(data);
+    if (error) setErrorMessage(error);
+  }, [data, error]);
 
   sessionStorage.setItem('client', client);
 
-  ///////////// store order on database ////////////////
-  const requestBody = {
-    client: client._id,
-    username: client.username,
-    email: client.email,
-  };
-  console.log(requestBody);
-  const storedToken = localStorage.getItem('authToken');
-  axios
-    .post('/api/order/bill', requestBody, {
-      headers: { Authorization: `Bearer ${storedToken}` },
-    })
+  postOrder(client)
     .then((response) => {
       console.log(response.data);
     })
-    .catch((err) => {
-      const errorDescription = err.response.data.message;
-      setErrorMessage(errorDescription);
+    .catch((errorMessage) => {
+      setErrorMessage(errorMessage);
     });
 
   return (
