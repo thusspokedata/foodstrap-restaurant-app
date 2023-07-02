@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function MenuItem(props) {
   const [quantity, setQuantity] = useState(0);

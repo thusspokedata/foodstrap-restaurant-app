@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
@@ -17,7 +17,6 @@ const Login = () => {
   // adding login states
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  // const [restaurants, setRestaurants] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -58,14 +57,12 @@ const Login = () => {
     };
     console.log(requestBody);
     axios
-      .post("/api/resto/login", requestBody)
+      .post("/api/restaurant/login", requestBody)
       .then((response) => {
         console.log(response.data);
         const token = response.data.authToken;
-        // store the token
         storeToken(token);
         verifyStoredToken().then(() => {
-          // redirect to homepage
           navigate("/");
         });
       })

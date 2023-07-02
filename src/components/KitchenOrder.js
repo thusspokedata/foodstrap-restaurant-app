@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function KitchenOrder() {
   const [orderToKitchen, setOrderToKitchen] = useState([]);
+
   function toKitchen(subtotal) {
+    if (orderToKitchen.includes(orderToKitchen)) return;
+
     setOrderToKitchen(orderToKitchen + subtotal);
   }
 

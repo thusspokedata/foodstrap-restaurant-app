@@ -1,7 +1,7 @@
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import Header from "./components/Header";
-import SearchClient from "./components/SearchClient";
+// import SearchClient from "./components/SearchClient";
 // import QRCustomer from "./components/QRCustomer";
 import Login from "./components/Login";
 import Tables from "./components/Tables";
