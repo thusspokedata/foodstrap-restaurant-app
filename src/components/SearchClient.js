@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import UserContext from "../context/UserContext";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import UserContext from '../context/UserContext';
+import axios from 'axios';
 
 // react bootstrap
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Alert from "react-bootstrap/Alert";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Alert from 'react-bootstrap/Alert';
 
 function SearchClient(props) {
   console.log(`this is props.result: ${props.result}`);
@@ -13,7 +13,7 @@ function SearchClient(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
+    const storedToken = localStorage.getItem('authToken');
     axios
       .get(`/api/auth/${props.result}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -30,7 +30,7 @@ function SearchClient(props) {
       });
   }, [props.result]);
 
-  sessionStorage.setItem("client", client);
+  sessionStorage.setItem('client', client);
 
   ///////////// store order on database ////////////////
   const requestBody = {
@@ -39,9 +39,9 @@ function SearchClient(props) {
     email: client.email,
   };
   console.log(requestBody);
-  const storedToken = localStorage.getItem("authToken");
+  const storedToken = localStorage.getItem('authToken');
   axios
-    .post("/api/order/bill", requestBody, {
+    .post('/api/order/bill', requestBody, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
     .then((response) => {
@@ -59,7 +59,7 @@ function SearchClient(props) {
       ) : (
         <>
           <Alert key="info" variant="info">
-            <Card className="mt-3" style={{ width: "24rem" }}>
+            <Card className="mt-3" style={{ width: '24rem' }}>
               <Card.Header>
                 <strong>Username: </strong>
                 {client.username}

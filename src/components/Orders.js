@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import UserContext from "../context/UserContext";
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import UserContext from '../context/UserContext';
 
-import Table from "react-bootstrap/Table";
-import MenuItem from "./MenuItem";
+import Table from 'react-bootstrap/Table';
+import MenuItem from './MenuItem';
 
 function Orders() {
   const [menus, setMenus] = useState([]);
@@ -14,10 +14,10 @@ function Orders() {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-    setClient(sessionStorage.getItem("client"));
+    const storedToken = localStorage.getItem('authToken');
+    setClient(sessionStorage.getItem('client'));
     axios
-      .get("/api/products", {
+      .get('/api/products', {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -39,48 +39,30 @@ function Orders() {
   //////////////////////////////////////////////////
   function toKitchen(subtotal) {
     setOrderToKitchen(orderToKitchen + subtotal);
-    sessionStorage.setItem("kitchen", orderToKitchen + subtotal);
+    sessionStorage.setItem('kitchen', orderToKitchen + subtotal);
   }
 
   const optionsDrinks = menus.map((item, i) => {
-    if (item.category === "drink") {
-      return (
-        <MenuItem
-          calcFinalPrice={calcFinalPrice}
-          toKitchen={toKitchen}
-          item={item}
-        />
-      );
+    if (item.category === 'drink') {
+      return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
   });
 
   const optionsDessert = menus.map((item, i) => {
-    if (item.category === "dessert") {
-      return (
-        <MenuItem
-          calcFinalPrice={calcFinalPrice}
-          toKitchen={toKitchen}
-          item={item}
-        />
-      );
+    if (item.category === 'dessert') {
+      return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
   });
 
   const optionsMeat = menus.map((item, i) => {
-    if (item.category === "dish") {
-      return (
-        <MenuItem
-          calcFinalPrice={calcFinalPrice}
-          toKitchen={toKitchen}
-          item={item}
-        />
-      );
+    if (item.category === 'dish') {
+      return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
   });
 
   let pedido = [];
   if (orderToKitchen.length > 0) {
-    const Arr = orderToKitchen.split("&&");
+    const Arr = orderToKitchen.split('&&');
     pedido = Arr.map((e) => {
       return <h3>{e}</h3>;
     });

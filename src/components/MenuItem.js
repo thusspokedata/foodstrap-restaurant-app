@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function MenuItem(props) {
   const [quantity, setQuantity] = useState(0);
@@ -19,11 +19,7 @@ export default function MenuItem(props) {
     <>
       <ul>
         <td className="col-4">
-          <option
-            value={props.item.productID}
-            key={props.item._id}
-            className="text-start"
-          >
+          <option value={props.item.productID} key={props.item._id} className="text-start">
             {`${props.item.productName} $${props.item.price}`}
           </option>
         </td>
@@ -42,15 +38,7 @@ export default function MenuItem(props) {
           />
         </td>
         <td className="col-1 text-end">
-          <input
-            type=""
-            id="quantity"
-            name="quantity"
-            min="0"
-            max="25"
-            className="col-11 text-end"
-            value={subtotal}
-          />
+          <input type="" id="quantity" name="quantity" min="0" max="25" className="col-11 text-end" value={subtotal} />
         </td>
       </ul>
     </>

@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../context/auth";
-import { Navigate } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/auth';
+import { Navigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function ProtectedRoute({ children, redirectTo }) {
   const { isLoggedIn, isLoading } = useContext(AuthContext);

@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { AuthContext } from "../context/auth";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../context/auth';
 
 // Bootstrap
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 const Login = () => {
   // bootstrap
@@ -15,8 +15,8 @@ const Login = () => {
   //   const handleShow = () => setShow(true);
 
   // adding login states
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -57,21 +57,21 @@ const Login = () => {
     };
     console.log(requestBody);
     axios
-      .post("/api/restaurant/login", requestBody)
+      .post('/api/restaurant/login', requestBody)
       .then((response) => {
         console.log(response.data);
         const token = response.data.authToken;
         storeToken(token);
         verifyStoredToken().then(() => {
-          navigate("/");
+          navigate('/');
         });
       })
       .catch((err) => {
         const errorDescription = err.response.data.message;
         setErrorMessage(errorDescription);
       });
-    setPassword("");
-    setEmail("");
+    setPassword('');
+    setEmail('');
   };
 
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -126,18 +126,11 @@ const Login = () => {
               </select> */}
             </Form.Group>
             <Modal.Footer>
-              <Button
-                variant="info text-white col-6 mx-auto"
-                type="submit"
-                onClick={handleClose}
-              >
+              <Button variant="info text-white col-6 mx-auto" type="submit" onClick={handleClose}>
                 Login
               </Button>
             </Modal.Footer>
-            <label
-              htmlFor="recipient-name"
-              className="col-form-label text-end mt-0 fs-6 fst-italic"
-            >
+            <label htmlFor="recipient-name" className="col-form-label text-end mt-0 fs-6 fst-italic">
               *Required
             </label>
           </Form>

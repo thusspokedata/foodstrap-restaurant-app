@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function KitchenOrder() {
   const [orderToKitchen, setOrderToKitchen] = useState([]);
@@ -11,7 +11,7 @@ function KitchenOrder() {
 
   let pedido = [];
   if (orderToKitchen.length > 0) {
-    const Arr = orderToKitchen.split("&&");
+    const Arr = orderToKitchen.split('&&');
     pedido = Arr.map((e) => {
       return <h3>{e}</h3>;
     });

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -18,11 +18,7 @@ function Bild() {
         />
       </Form.Group>
       <Modal.Footer>
-        <Button
-          variant="info text-white col-6 mx-auto"
-          type="submit"
-          onClick={handleClose}
-        >
+        <Button variant="info text-white col-6 mx-auto" type="submit" onClick={handleClose}>
           Close Table
         </Button>
       </Modal.Footer>

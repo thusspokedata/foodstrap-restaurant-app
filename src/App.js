@@ -1,16 +1,16 @@
-import "./App.css";
-import ProtectedRoute from "./components/ProtectedRoutes";
-import Header from "./components/Header";
+import './App.css';
+import ProtectedRoute from './components/ProtectedRoutes';
+import Header from './components/Header';
 // import SearchClient from "./components/SearchClient";
 // import QRCustomer from "./components/QRCustomer";
-import Login from "./components/Login";
-import Tables from "./components/Tables";
-import OrdersPage from "./pages/Orders";
-import Scanner from "./pages/Scanner";
-import Kitchen from "./pages/Kitchen";
-import UserContext from "./context/UserContext";
+import Login from './components/Login';
+import Tables from './components/Tables';
+import OrdersPage from './pages/Orders';
+import Scanner from './pages/Scanner';
+import Kitchen from './pages/Kitchen';
+import UserContext from './context/UserContext';
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const user = {

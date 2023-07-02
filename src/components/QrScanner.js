@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import QrReader from "react-qr-reader";
-import SearchClient from "./SearchClient";
+import React, { useState } from 'react';
+import QrReader from 'react-qr-reader';
+import SearchClient from './SearchClient';
 
 export default function QrCode() {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
 
   const HandleScan = (event) => {
     if (event) {
@@ -21,12 +21,7 @@ export default function QrCode() {
         <div className="row d-flex align-items-center justify-content-center">
           <div className="col-12 col-sm-7 ">
             <section className="qrcode d-flex align-items-center justify-content-center">
-              <QrReader
-                delay={300}
-                onError={handleError}
-                onScan={HandleScan}
-                style={{ width: "60%" }}
-              />
+              <QrReader delay={300} onError={handleError} onScan={HandleScan} style={{ width: '60%' }} />
               {/* <p className="m-5">{`ClientID: ${result}`}</p> */}
             </section>
           </div>

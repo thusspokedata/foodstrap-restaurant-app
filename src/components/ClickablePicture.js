@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import { useState } from 'react';
 
 export default function ClickablePicture({ img, imgClicked }) {
   const [image, setImage] = useState(true);

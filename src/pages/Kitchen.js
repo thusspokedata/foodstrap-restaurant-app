@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Kitchen() {
   const [orders, setOrders] = useState([]);
@@ -7,10 +7,10 @@ function Kitchen() {
   const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-    setOrderList(sessionStorage.getItem("kitchen"));
+    const storedToken = localStorage.getItem('authToken');
+    setOrderList(sessionStorage.getItem('kitchen'));
     axios
-      .get("/api/order/kitchen", {
+      .get('/api/order/kitchen', {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -25,7 +25,7 @@ function Kitchen() {
 
   let pedido = [];
   if (orderList.length > 0) {
-    const Arr = orderList.split("&&");
+    const Arr = orderList.split('&&');
     pedido = Arr.map((e) => {
       return <h3>{e}</h3>;
     });
