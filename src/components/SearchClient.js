@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getClient, postOrder } from '../api/api';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -11,8 +11,8 @@ function SearchClient(props) {
   const [client, setClient] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const { data, error, isLoading, isError } = useQuery(['client', props.result], () => getClient(props.result), {
-    retry: false, 
+  const { data, error } = useQuery(['client', props.result], () => getClient(props.result), {
+    retry: false,
   });
   useEffect(() => {
     if (data) setClient(data);

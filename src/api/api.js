@@ -57,3 +57,16 @@ export const postOrder = (client) => {
       throw err.response.data.message;
     });
 };
+
+export function getTables(adminRestoId) {
+  const storedToken = localStorage.getItem('authToken');
+
+  return axios
+    .get(`/api/resto/restaurant/admin/${adminRestoId}?timestamp=${Date.now()}`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+    .then((response) => response.data)
+    .catch((err) => {
+      throw err.response.data.message;
+    });
+}

@@ -19,7 +19,7 @@ function Header() {
             <>
               <Nav className="me-auto">
                 <Nav.Link href="/tables">Tables</Nav.Link>
-                <Nav.Link href="/orders">Orders</Nav.Link>
+                {/* <Nav.Link href="/orders">Orders</Nav.Link> */}
                 <Nav.Link href="/scanner">
                   <i className="bi bi-qr-code-scan"></i>
                 </Nav.Link>

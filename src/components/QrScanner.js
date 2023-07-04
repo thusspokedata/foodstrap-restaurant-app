@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import QrReader from 'react-qr-reader';
 import SearchClient from './SearchClient';
+import useStore from '../context/store';
 
 export default function QrCode() {
-  const [result, setResult] = useState('');
+  const [scanResult, setScanResult] = useState('');
+  const setClientId = useStore((state) => state.setClientId);
 
   const HandleScan = (event) => {
     if (event) {
-      setResult(event);
+      setScanResult(event);
+      setClientId(event); // establecer el clientId en el store
     }
   };
 
@@ -22,11 +25,10 @@ export default function QrCode() {
           <div className="col-12 col-sm-7 ">
             <section className="qrcode d-flex align-items-center justify-content-center">
               <QrReader delay={300} onError={handleError} onScan={HandleScan} style={{ width: '60%' }} />
-              {/* <p className="m-5">{`ClientID: ${result}`}</p> */}
             </section>
           </div>
           <div className="col-12 col-sm-7 d-flex align-items-center justify-content-center">
-            <SearchClient result={result} />
+            <SearchClient result={scanResult} />
           </div>
         </div>
       </div>

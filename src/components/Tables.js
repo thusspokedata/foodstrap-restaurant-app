@@ -1,40 +1,50 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import tableopen from '../assets/open.png';
 import tableclose from '../assets/close.png';
 import ClickablePicture from '../components/ClickablePicture';
-import axios from 'axios';
+import { getTables } from '../api/api';
 import { AuthContext } from '../context/auth';
+import useStore from '../context/store';
+import { useQuery } from '@tanstack/react-query';
 
 function Home() {
+  const { setTables } = useStore();
   const { user } = useContext(AuthContext);
   console.log(user);
   const adminRestoId = user?._id;
   console.log('adminRestoId', adminRestoId);
 
-  const [tables, setTables] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const {
+    data: tablesData,
+    error,
+    isLoading,
+  } = useQuery(
+    ['tables', adminRestoId], // un array único como key de la query
+    () => getTables(adminRestoId), // nuestra función que devuelve una promesa
+    {
+      enabled: !!adminRestoId, // la consulta se ejecuta sólo si adminRestoId existe
+      retry: false, // no intentar de nuevo automáticamente si la consulta falla
+    },
+  );
 
   useEffect(() => {
-    if (adminRestoId) {
-      const storedToken = localStorage.getItem('authToken');
-      axios
-        .get(`/api/resto/restaurant/admin/${adminRestoId}?timestamp=${Date.now()}`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setTables(response.data.tables);
-        })
-        .catch((err) => {
-          const errorDescription = err.response.data.message;
-          setErrorMessage(errorDescription);
-        });
+    if (tablesData) {
+      setTables(tablesData);
     }
-  }, [adminRestoId]);
+  }, [tablesData, setTables]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.error(error);
+    return <div>An error occurred</div>;
+  }
 
   /// creating figure tables
   let t = [];
-  for (let i = 0; i < tables; i++) {
+  for (let i = 0; i < tablesData?.tables; i++) {
     t.push(i);
   }
 

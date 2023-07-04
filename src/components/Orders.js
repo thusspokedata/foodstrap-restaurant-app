@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getProducts } from '../api/api'; 
+import { getProducts } from '../api/api';
 import UserContext from '../context/UserContext';
 import Table from 'react-bootstrap/Table';
 import MenuItem from './MenuItem';
+import useStore from '../context/store';
 
 function Orders() {
   const [menus, setMenus] = useState([]);
@@ -11,6 +12,9 @@ function Orders() {
   const [totalToBill, setTotaltoBill] = useState(0);
   const [client, setClient] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const { setTables, tables } = useStore(); // importa también 'tables' desde tu store
+  // el resto de tu código...
 
   useEffect(() => {
     setClient(sessionStorage.getItem('client'));
