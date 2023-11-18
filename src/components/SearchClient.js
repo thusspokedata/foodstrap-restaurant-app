@@ -14,6 +14,7 @@ function SearchClient(props) {
   const { data, error } = useQuery(['client', props.result], () => getClient(props.result), {
     retry: false,
   });
+  
   useEffect(() => {
     if (data) setClient(data);
     if (error) setErrorMessage(error);
