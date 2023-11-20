@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tableOpen from '../../assets/open.png';
 import tableClose from '../../assets/close.png';
