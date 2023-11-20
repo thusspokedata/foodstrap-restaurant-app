@@ -14,7 +14,7 @@ function Kitchen() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log('this is stored token', response.data);
         setOrders(response.data);
       })
       .catch((err) => {

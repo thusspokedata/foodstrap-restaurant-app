@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api/api';
-import { AuthContext } from '../context/auth';
+import { login } from '../../api/api';
+import { AuthContext } from '../../context/auth';
 
 // Bootstrap
 import Button from 'react-bootstrap/Button';

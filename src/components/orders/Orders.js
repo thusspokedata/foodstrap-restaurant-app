@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getProducts } from '../api/api';
-import UserContext from '../context/UserContext';
+import { getProducts } from '../../api/api';
+import UserContext from '../../context/UserContext';
 import Table from 'react-bootstrap/Table';
 import MenuItem from './MenuItem';
-import useStore from '../context/store';
 
 function Orders() {
+  const user = useContext(UserContext);
   const [menus, setMenus] = useState([]);
   const [finalPrice, setFinalPrice] = useState(0);
   const [orderToKitchen, setOrderToKitchen] = useState([]);
@@ -13,15 +13,13 @@ function Orders() {
   const [client, setClient] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const { setTables, tables } = useStore(); // importa también 'tables' desde tu store
-  // el resto de tu código...
 
   useEffect(() => {
     setClient(sessionStorage.getItem('client'));
 
     getProducts()
       .then((data) => {
-        console.log(data);
+        console.log('this is order', data);
         setMenus(data);
       })
       .catch((errorMessage) => {
@@ -45,18 +43,21 @@ function Orders() {
     if (item.category === 'drink') {
       return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
+    return null;
   });
 
   const optionsDessert = menus.map((item, i) => {
     if (item.category === 'dessert') {
       return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
+    return null;
   });
 
   const optionsMeat = menus.map((item, i) => {
     if (item.category === 'dish') {
       return <MenuItem calcFinalPrice={calcFinalPrice} toKitchen={toKitchen} item={item} />;
     }
+    return null;
   });
 
   let pedido = [];
@@ -65,14 +66,13 @@ function Orders() {
     pedido = Arr.map((e) => {
       return <h3>{e}</h3>;
     });
+    return null;
   }
 
   // sessionStorage.setItem("kitchen", pedido);
   ///// not working ////////////
-  const user = useContext(UserContext);
-  console.log(useContext(UserContext));
-
-  console.log(totalToBill);
+  console.log('useContext --order.js', user);
+  console.log('totaltoBill', totalToBill);
 
   const handleTotaltoBillChange = (e) => setTotaltoBill(e.target.value);
 
@@ -82,7 +82,7 @@ function Orders() {
         {/* <UserContext.Provider value={user}>
           <QrScanner />
         </UserContext.Provider> */}
-        {/* <h2>{client}</h2> */}
+        <h2>{client}</h2>
       </div>
       <div className="container col-12 col-sm-7 col-lg-8">
         <form name="tblform">

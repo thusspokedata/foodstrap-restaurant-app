@@ -1,5 +1,5 @@
 import React from 'react';
-import QrCode from '../components/QrScanner';
+import QrCode from '../components/QR/QrScanner';
 
 function Scanner() {
   return <QrCode />;
